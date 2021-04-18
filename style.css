@@ -24,7 +24,7 @@ header nav.navbar .navbar-brand{color:#fff;}
 section.todo-outer {
     width: 100%;
     float: left;
-    padding: 30px 0;
+    /* padding: 30px 0; */
 }
 section.todo-outer h1 {
     font-size: 40px;
@@ -43,4 +43,5 @@ table tr td button {
     padding: 0;
     cursor: pointer;
 }
-.completed{text-decoration: line-through;}
+.completed{text-decoration: line-through;color: dimgrey;}
+i.fa{font-size: 20px;}
