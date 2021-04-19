@@ -172,7 +172,7 @@ let searchtextbox = document.getElementById("searchtextbox");
 searchtextbox.addEventListener("input", function () {
     let trlist = document.querySelectorAll("tr");
     Array.from(trlist).forEach(function (item) {
-        let trvalue = item.getElementsByTagName("td")[0].innerText;
+        let trvalue = item.getElementsByTagName("td")[1].innerText;
         let searching = searchtextbox.value;
         let re = new RegExp(searching, 'gi');
         if (trvalue.match(re)) {
