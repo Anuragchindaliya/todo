@@ -1,4 +1,5 @@
 # todo
 todo just for practice
 
-[Watch this repo](https://anuragchindaliya.github.io/todo/)
+<a href="https://anuragchindaliya.github.io/todo/" target="_blank">Go watch this repo</a>
+
