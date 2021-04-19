@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Todo List</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
     crossorigin="anonymous" />
-    <!-- bootstrap -->
+  <!-- bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
@@ -22,10 +23,10 @@
       <div class="row">
         <div class="col-sm-12">
           <nav class="navbar justify-content-between">
-            <a class="navbar-brand">Todo List</a>
+            <a class="navbar-brand"><i class="fa fa-tasks p-2"></i>TODO</a>
             <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search Task" aria-label="Search"
-                id="searchtextbox" accesskey="s"/>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search Task....    [ Alt + s ]" aria-label="Search"
+                id="searchtextbox" accesskey="s" />
             </form>
           </nav>
         </div>
@@ -36,26 +37,30 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-sm-12 col-md-8">
-          <!-- <h3>Welcome in Todo List Application</h3> -->
+          <h3 class="text-center">Welcome in Todo task List Application</h3>
           <div class="todo-inner">
             <div class="form-row">
-              <div class="col-8 mr-sm-2">
-                <input type="text" class="form-control" placeholder="Enter your first task" id="addtaskinput" accesskey="t" />
+              <div class="col-md-8 col-sm-12  bd-search">
+                <input type="text" class="form-control" placeholder="Create your first task" id="addtaskinput"
+                  accesskey="t" />
                 <input type="hidden" id="saveindex">
               </div>
-              <button type="button" class="btn btn-success mr-sm-2" id="addtaskbtn">
-                Add Task
-              </button>
-              <button type="button" class="btn btn-success mr-sm-2" id="savetaskbtn" style="display: none;">
-                Save Task
-              </button>
-              <button type="button" id="deleteallbtn" class="btn btn-danger">
-                Delete All
-              </button>
+              <div class="col-md-4 col-sm-6">
+                <button type="button" class="btn btn-success mr-sm-2" id="addtaskbtn">
+               
+                   Add Task
+                </button>
+                <button type="button" class="btn btn-success mr-sm-2" id="savetaskbtn" style="display: none;">
+                  Save Task
+                </button>
+                <button type="button" id="deleteallbtn" class="btn btn-danger">
+                  Delete All
+                </button>
+              </div>
             </div>
             <div class="to-do-output">
-              <table class="table table-striped mt-3 mb-0" id="addedtasklist">
-
+              <table class="table table-striped table-hover mt-3 mb-0" id="addedtasklist">
+                <!-- <td>No Task</td> -->
               </table>
             </div>
           </div>

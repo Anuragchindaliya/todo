@@ -58,13 +58,13 @@ addtaskbtn.addEventListener("click", function () {
 
 function showtask() {
     let webtask = localStorage.getItem('localtask');
+    let html = '';
     if (webtask == null) {
         taskobj = [];
     }
     else {
         taskobj = JSON.parse(webtask);
     }
-    let html = '';
     
     let addedtasklist = document.getElementById('addedtasklist');
 
@@ -72,13 +72,13 @@ function showtask() {
         // item.task_name = item.task_name.replace(/^./, item.task_name[0].toUpperCase());
         if (item.completeStatus == true) {
             completeTD = `<td class="completed">${item.task_name}</td>`;
-            completeBtn=`<button type="button" class="text-success" style="color:dimgrey!important;" id="${index}" title="complete"><i class="fa fa-check-square"></i>Completed</button>`;
+            completeBtn=`<button type="button" class="text-success fa fa-check-square" style="font-size:20px" id="${index}" title="completed"><span class="d-md-inline-block" style=" display:none;font-family:'roboto',sans-serif;font-size:15px">Done</span></button>`;
         } else {
             completeTD = `<td>${item.task_name}</td>`;
-            completeBtn=`<button type="button" class="text-success" id="${index}" title="complete"><i class="fa fa-check-square-o"></i>Complete</button>`;
+            completeBtn=`<button type="button" class="text-success fa fa-check-square-o"  style="color:#007bff!important; font-size:20px" id="${index}" title="complete"><span class="d-md-inline-block" style=" display:none;font-family:'roboto',sans-serif;font-size:15px">To go</span></button>`;
         }
         html += `<tr>
-        <th scope="row">${index + 1}</th>
+        <td scope="row">${index + 1}</td>
         ${completeTD}
         <td style="color:#8c8383; font-size:12px;">${timeAgo(item.time)}</td>
         <td>${completeBtn}</td>
@@ -105,7 +105,7 @@ function edittask(index) {
     let addtaskbtn = document.getElementById('addtaskbtn');
     let savetaskbtn = document.getElementById('savetaskbtn');
     addtaskbtn.style.display = "none";
-    savetaskbtn.style.display = "block";
+    savetaskbtn.style.display = "inline-block";
     enterkey = false;
 
 }
@@ -133,7 +133,7 @@ savetaskbtn.addEventListener('click', function () {
     }
     let addtaskbtn = document.getElementById('addtaskbtn');
     let savetaskbtn = document.getElementById('savetaskbtn');
-    addtaskbtn.style.display = "block";
+    addtaskbtn.style.display = "inline-block";
     savetaskbtn.style.display = "none";
     addtaskinput.value = '';
     enterkey=true;
@@ -161,7 +161,7 @@ deleteallbtn.addEventListener("click", function () {
     showtask();
     let addtaskbtn = document.getElementById('addtaskbtn');
     let savetaskbtn = document.getElementById('savetaskbtn');
-    addtaskbtn.style.display = "block";
+    addtaskbtn.style.display = "inline-block";
     savetaskbtn.style.display = "none";
     document.getElementById("addtaskinput").placeholder=`Enter your first task`;
 
@@ -255,9 +255,9 @@ const MONTH_NAMES = [
 
 function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
     const day = date.getDate();
-    const month = MONTH_NAMES[date.getMonth()];
+    // const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
-    const hours = date.getHours();
+    const hours = date.toLocaleTimeString();
     let minutes = date.getMinutes();
 
     if (minutes < 10) {
