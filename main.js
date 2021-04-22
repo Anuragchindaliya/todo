@@ -1,28 +1,28 @@
 showtask();
 
-document.addEventListener("keydown",function(e){
-    if(e.keyCode==46){
+document.addEventListener("keydown", function (e) {
+    if (e.keyCode == 46) {
         deleteallbtn.click();
     }
-    
+
 })
 
 let addtaskinput = document.getElementById("addtaskinput");
 let addtaskbtn = document.getElementById("addtaskbtn");
-enterkey=true;
+enterkey = true;
 // Add button will work on click of keyborad enter key
-addtaskinput.addEventListener("keyup", function(event) {
+addtaskinput.addEventListener("keyup", function (event) {
     let savevalue = document.getElementById("saveindex");
     if (event.keyCode === 13) {
         event.preventDefault();
-        if(enterkey==true){
-            
+        if (enterkey == true) {
+
             addtaskbtn.click();
-        }else{
+        } else {
             savetaskbtn.click();
         }
     }
-  });
+});
 
 
 // addbtn functionality
@@ -34,8 +34,7 @@ addtaskbtn.addEventListener("click", function () {
         if (webtask == null) {
             // create an Array
             taskobj = [];
-        }
-        else {
+        } else {
             //use parse while getting values from localstorage
             taskobj = JSON.parse(webtask);
         }
@@ -45,12 +44,16 @@ addtaskbtn.addEventListener("click", function () {
 
         //add input value to taskobj array with push function
         //array.push(item1, item2, ..., itemX)
-        taskobj.push({ 'task_name': addtaskinputval, 'completeStatus': false, 'time': Date() });
+        taskobj.push({
+            'task_name': addtaskinputval,
+            'completeStatus': false,
+            'time': Date()
+        });
         // use stringify while putting values to localstorage
         localStorage.setItem("localtask", JSON.stringify(taskobj));
     }
     addtaskinput.value = '';
-    
+
     showtask();
 })
 
@@ -61,36 +64,39 @@ function showtask() {
     let html = '';
     if (webtask == null) {
         taskobj = [];
-    }
-    else {
+    } else {
         taskobj = JSON.parse(webtask);
     }
-    
+
     let addedtasklist = document.getElementById('addedtasklist');
 
     taskobj.forEach((item, index) => {
         // item.task_name = item.task_name.replace(/^./, item.task_name[0].toUpperCase());
         if (item.completeStatus == true) {
             completeTD = `<td class="completed">${item.task_name}</td>`;
-            completeBtn=`<button type="button" class="text-success fa fa-check-square" style="font-size:20px" id="${index}" title="completed"><span class="d-md-inline-block" style=" display:none;font-family:'roboto',sans-serif;font-size:15px">Done</span></button>`;
+            completeBtn = `<button type="button" class="text-success fa fa-check-square" style="font-size:20px" id="${index}" title="completed"><span class="d-md-inline-block idex ml-2" style=" display:none;font-family:'roboto',sans-serif;font-size:15px;  color:#28a745;padding: 5px 10px;">Done</span></button>`;
         } else {
             completeTD = `<td>${item.task_name}</td>`;
-            completeBtn=`<button type="button" class="text-success fa fa-check-square-o"  style="color:#007bff!important; font-size:20px" id="${index}" title="complete"><span class="d-md-inline-block" style=" display:none;font-family:'roboto',sans-serif;font-size:15px">To go</span></button>`;
+            completeBtn = `<button type="button" class="text-success fa fa-check-square-o"  style="color:#007bff!important; font-size:20px" id="${index}" title="complete"><span class="d-md-inline-block idex ml-2" style=" display:none;font-family:'roboto',sans-serif;font-size:15px;padding: 5px 10px;">To go</span></button>`;
         }
-        html += `<tr>
-        <td scope="row">${index + 1}</td>
-        ${completeTD}
-        <td style="color:#8c8383; font-size:12px;">${timeAgo(item.time)}</td>
-        <td>${completeBtn}</td>
-        <td><button type="button" onclick="edittask(${index})" class="text-primary" title="Edit"><i class="fa fa-edit"></i></button></td>
-        <td><button type="button" onclick="deleteitem(${index})" class="text-danger" title="Delete" accesskey="delete"><i class="fa fa-trash"></i></button></td>
+        html += `
+        <tr>
+                <td scope="row"><span class="idex">${index + 1}</span></td>
+                    ${completeTD}
+                
+         
+                <td>${completeBtn}</td>
+                <td><button type="button" onclick="edittask(${index})" class="text-primary" title="Edit"><i class="fa fa-edit"></i></button></td>
+                <td><button type="button" onclick="deleteitem(${index})" class="text-danger" title="Delete" accesskey="delete"><i class="fa fa-trash"></i></button></td>
+                <td style="color:#8c8383; font-size:12px;">${timeAgo(item.time)}</td>
+         
     </tr>`;
         index++;
-        document.getElementById("addtaskinput").placeholder=`Enter your ${index+1} task`;
+        document.getElementById("addtaskinput").placeholder = `Enter your ${index + 1} task`;
     });
-    
+
     addedtasklist.innerHTML = html;
-    
+
 }
 
 
@@ -120,7 +126,7 @@ savetaskbtn.addEventListener('click', function () {
     let webtask = localStorage.getItem('localtask');
     let taskobj = JSON.parse(webtask);
     let saveindex = document.getElementById('saveindex').value;
-    let addtaskinputval =document.getElementById('addtaskinput').value;
+    let addtaskinputval = document.getElementById('addtaskinput').value;
 
     if (addtaskinputval.length == 0) {
         alert("Please enter task name\n\n▬▬▬▬▬▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬▬▬▬▬▬");
@@ -136,7 +142,7 @@ savetaskbtn.addEventListener('click', function () {
     addtaskbtn.style.display = "inline-block";
     savetaskbtn.style.display = "none";
     addtaskinput.value = '';
-    enterkey=true;
+    enterkey = true;
     showtask();
 })
 
@@ -146,8 +152,8 @@ function deleteitem(index) {
     let taskobj = JSON.parse(webtask);
     // array.splice(index, howmany, item1, ....., itemX)
     taskobj.splice(index, 1);
-    if(taskobj.size==null){
-        document.getElementById("addtaskinput").placeholder=`Enter your first task`;
+    if (taskobj.size == null) {
+        document.getElementById("addtaskinput").placeholder = `Enter your first task`;
     }
     localStorage.setItem('localtask', JSON.stringify(taskobj));
 
@@ -163,7 +169,7 @@ deleteallbtn.addEventListener("click", function () {
     let savetaskbtn = document.getElementById('savetaskbtn');
     addtaskbtn.style.display = "inline-block";
     savetaskbtn.style.display = "none";
-    document.getElementById("addtaskinput").placeholder=`Enter your first task`;
+    document.getElementById("addtaskinput").placeholder = `Enter your first task`;
 
 })
 
@@ -177,8 +183,7 @@ searchtextbox.addEventListener("input", function () {
         let re = new RegExp(searching, 'gi');
         if (trvalue.match(re)) {
             item.style.display = "table-row";
-        }
-        else {
+        } else {
             item.style.display = "none";
         }
     })
@@ -247,16 +252,21 @@ addedtasklist.addEventListener("click", function (e) {
 
 
 //time time
-const MONTH_NAMES = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
+// const MONTH_NAMES = [
+//     'January', 'February', 'March', 'April', 'May', 'June',
+//     'July', 'August', 'September', 'October', 'November', 'December'
+// ];
 
 
 function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
+    const MONTH_NAMES = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
     const day = date.getDate();
-    // const month = MONTH_NAMES[date.getMonth()];
+    const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
+    // const hours = date.getHours();
     const hours = date.toLocaleTimeString();
     let minutes = date.getMinutes();
 
@@ -268,7 +278,8 @@ function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
     if (prefomattedDate) {
         // Today at 10:20
         // Yesterday at 10:20
-        return `${prefomattedDate} at ${hours}:${minutes}`;
+        // return `${prefomattedDate} at ${hours}:${minutes}`;
+        return `${prefomattedDate} at ${hours}`;
     }
 
     if (hideYear) {
