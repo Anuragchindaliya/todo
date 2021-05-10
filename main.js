@@ -87,7 +87,7 @@ function showtask() {
          
                 <td>${completeBtn}</td>
                 <td><button type="button" onclick="edittask(${index})" class="text-primary" title="Edit"><i class="fa fa-edit"></i></button></td>
-                <td><button type="button" onclick="deleteitem(${index})" class="text-danger" title="Delete" accesskey="delete"><i class="fa fa-trash"></i></button></td>
+                <td><button type="button" onclick="deleteitem(${index})" class="text-danger" title="Delete" accesskey="delete"><i class="fa fa-trash-o"></i></button></td>
                 <td style="color:#8c8383; font-size:12px;">${timeAgo(item.time)}</td>
          
     </tr>`;
@@ -284,10 +284,12 @@ function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
 
     if (hideYear) {
         // 10. January at 10:20
-        return `${day}. ${month} at ${hours}:${minutes}`;
+        // return `${day}. ${month} at ${hours}:${minutes}`;
+        return `${day}-${month} at ${hours}`;
     }
 
     // 10. January 2017. at 10:20
+    
     return `${day}. ${month} ${year}. at ${hours}:${minutes}`;
 }
 
