@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+/* @font-face {
+	font-family: 'Roboto-Regular';
+	src: url('../fonts/Roboto-Regular.eot');
+	src:  url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../fonts/fontawesome-webfont.eot');
+	src: local('☺'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+body {
+    /* font-family: 'Roboto-Regular'; */
+    font-family: 'Roboto', sans-serif;
+    background: #e6e7ee;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+header .navbar {
+    padding: .5rem 0;
+}
+
+header nav.navbar .navbar-brand {
+    color: #fff;
+}
+
+section.todo-outer {
+    width: 100%;
+    float: left;
+    /* padding: 30px 0; */
+}
+
+section.todo-outer h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.todo-inner {
+    width: 100%;
+    float: left;
+    padding: 40px;
+    box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
+    background: #e6e7ee;
+    border-radius: 0.55rem;
+}
+
+table tr td button {
+    background: no-repeat;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: dimgrey;
+}
+
+i.fa {
+    font-size: 20px;
+}
+
+.to-do-output {
+    overflow: auto;
+}
+
+.bd-search::after {
+    position: absolute;
+    top: .4rem;
+    right: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+    padding-right: .25rem;
+    padding-left: .25rem;
+    font-size: .75rem;
+    color: #6c757d;
+    content: "Alt + t";
+    border: 1px solid #dee2e6;
+    border-radius: .125rem;
+}
+
+.idex {
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+    background-color: transparent;
+    /* color: #0056b3; */
+    padding: 2px 7px;
+    border-radius: .49rem;
+}
+.form-control{
+    font-size: 1rem;
+    border-radius: 0.55rem;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #FFFFFF;
+    background-color: #e6e7ee;
+}
+button.btn {
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+    border-radius: .55rem;
+}
+@media only screen and (max-width: 768px) {
+    .btnq {
+      margin:10px 10px 0px 0px;
+    }
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
