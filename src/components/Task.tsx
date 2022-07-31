@@ -17,11 +17,17 @@ const Task = ({ task, deleteTask, handleCompleteStatus, editTask, index }: IProp
             <td scope="row"><span className="idex">{index}</span></td>
             <td className={completeStatus ? "completed" : ""}>{taskName}</td>
             <td>
-                <button type="button" onClick={() => handleCompleteStatus(task.id)}
+                <button test-statusbtn="statusBtn" type="button"
+                    onClick={() => handleCompleteStatus(task.id)}
                     className={`text-${completeStatus ? "success" : "primary"}`}
                     title={`complete${completeStatus ? "d" : ""}`}>
+
                     <i className={`fa fa-check-square${completeStatus ? "" : "-o"}`}></i>
-                    <span className="d-md-inline-block idex ml-2">{completeStatus ? "Done" : "To go"}</span>
+
+                    <span data-csl="completeStatusLabel" className="d-md-inline-block idex ml-2">
+                        {completeStatus ? "Done" : "To go"}
+                    </span>
+
                 </button>
                 {/* {task.completeStatus ? <button type="button" className="text-success fa fa-check-square" style={{ fontSize: '20px' }} id={task.id.toString()} title="completed"><span className="d-md-inline-block idex ml-2" style={{ display: 'none', fontFamily: '"roboto",sans-serif', fontSize: '15px', color: '#28a745', padding: '5px 10px' }}>Done</span></button>
                     :

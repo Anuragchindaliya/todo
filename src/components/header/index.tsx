@@ -1,6 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import React, { ChangeEvent, useEffect, useState } from "react"
+interface IProps {
+    setFilterText: (q: string) => void
+};
 
-const Header = ({ setFilterText }: { setFilterText: Function }) => {
+const Header: React.FC<IProps> = ({ setFilterText }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value)
