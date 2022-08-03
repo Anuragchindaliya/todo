@@ -23,7 +23,7 @@ it("render task with name", () => {
         const editTask = jest.fn();
         const i = 1;
         // render(<Task {...{ task, deleteTask, handleCompleteStatus, editTask, index }} />)
-        render(<Task key={task.id} index={i + 1} task={task} deleteTask={deleteTask} handleCompleteStatus={handleCompleteStatus} editTask={editTask} />)
+        render(<Task key={task.id} index={i + 1} task={task} />)
     })
 
     const completeStatusLabel = document.querySelector("[data-csl=completeStatusLabel]")

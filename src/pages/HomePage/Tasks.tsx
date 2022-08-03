@@ -1,19 +1,15 @@
-import React, { memo } from 'react'
+import { useContext } from 'react'
 import Task from '../../components/Task'
+import { TodoContext } from '../../context/todoContext';
 import { ITask } from '../../interfaces'
-type IProps = {
-    tasks: ITask[];
-    deleteTask: Function;
-    handleCompleteStatus: Function;
-    editTask: Function
-}
-const Tasks = ({ tasks, deleteTask, handleCompleteStatus, editTask }: IProps) => {
-    console.count("-tasks")
+
+const Tasks = () => {
+    const { todos, searchTerm } = useContext(TodoContext);
     return (
         <table className="table table-striped table-hover mt-3 mb-0" id="addedtasklist">
             <tbody>
-                {tasks.length > 0 ? tasks.map((task: ITask, i) => (
-                    <Task key={task.id} index={i + 1} task={task} deleteTask={deleteTask} handleCompleteStatus={handleCompleteStatus} editTask={editTask} />
+                {todos?.length > 0 ? todos.filter((task) => task.taskName.includes(searchTerm)).map((task: ITask, i) => (
+                    <Task key={task.id} index={i + 1} task={task} />
                 )) :
                     <tr><td className='text-center'>No Task</td></tr>
                 }
@@ -22,4 +18,4 @@ const Tasks = ({ tasks, deleteTask, handleCompleteStatus, editTask }: IProps) =>
     )
 }
 
-export default memo(Tasks)
+export default Tasks;

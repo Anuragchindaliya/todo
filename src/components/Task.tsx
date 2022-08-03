@@ -1,24 +1,33 @@
 import moment from "moment";
+import { useContext } from "react";
+import { todoDeleteSingleAction, todoEditMode, todoHandleStatusAction } from "../context/todoAction";
+import { TodoContext } from "../context/todoContext";
 import { ITask } from "../interfaces"
 
 interface IProps {
     task: ITask;
-    deleteTask: Function;
-    handleCompleteStatus: Function;
-    editTask: Function;
     index: number;
 }
-const Task = ({ task, deleteTask, handleCompleteStatus, editTask, index }: IProps) => {
+const Task = ({ task, index }: IProps) => {
     const { id, taskName, completeStatus, time } = task;
 
-    console.count("--- task render")
+    const { dispatch } = useContext(TodoContext);
+    const deleteSingleTodo = () => {
+        dispatch?.(todoDeleteSingleAction(id));
+    }
+    const handleCompleteStatus = () => {
+        dispatch(todoHandleStatusAction(id))
+    }
+    const handleEditMode = () => {
+        dispatch(todoEditMode({ id, taskName }))
+    }
     return (
         <tr>
-            <td scope="row"><span className="idex">{index}</span></td>
+            <td><span className="idex">{index}</span></td>
             <td className={completeStatus ? "completed" : ""}>{taskName}</td>
             <td>
                 <button test-statusbtn="statusBtn" type="button"
-                    onClick={() => handleCompleteStatus(task.id)}
+                    onClick={handleCompleteStatus}
                     className={`text-${completeStatus ? "success" : "primary"}`}
                     title={`complete${completeStatus ? "d" : ""}`}>
 
@@ -29,19 +38,15 @@ const Task = ({ task, deleteTask, handleCompleteStatus, editTask, index }: IProp
                     </span>
 
                 </button>
-                {/* {task.completeStatus ? <button type="button" className="text-success fa fa-check-square" style={{ fontSize: '20px' }} id={task.id.toString()} title="completed"><span className="d-md-inline-block idex ml-2" style={{ display: 'none', fontFamily: '"roboto",sans-serif', fontSize: '15px', color: '#28a745', padding: '5px 10px' }}>Done</span></button>
-                    :
-                    <button type="button" className="text-success fa fa-check-square-o" style={{ color: '#007bff!important', fontSize: '20px' }} id={task.id.toString()} title="complete">
-                        <span className="d-md-inline-block idex ml-2" style={{ display: 'none', fontFamily: '"roboto",sans-serif', fontSize: '15px', padding: '5px 10px' }}>To go</span>
-                    </button>} */}
+
             </td>
             <td>
-                <button type="button" className="text-primary" title="Edit" onClick={() => editTask(id)}>
+                <button type="button" className="text-primary" title="Edit" onClick={handleEditMode}>
                     <i className="fa fa-edit" />
                 </button>
             </td>
             <td>
-                <button type="button" className="text-danger" title="Delete" onClick={() => deleteTask(id)} accessKey="delete">
+                <button type="button" className="text-danger" title="Delete" onClick={deleteSingleTodo} accessKey="delete">
                     <i className="fa fa-trash-o" />
                 </button>
             </td>

@@ -1,32 +1,33 @@
-import React, { ChangeEvent, useEffect, useState } from "react"
-interface IProps {
-    setFilterText: (q: string) => void
-};
+import { ChangeEvent, useContext, useRef, } from "react"
+import { todoSearch } from "../../context/todoAction";
+import { TodoContext } from "../../context/todoContext";
+const Header = () => {
 
-const Header: React.FC<IProps> = ({ setFilterText }) => {
-    const [searchTerm, setSearchTerm] = useState("");
+    const { dispatch } = useContext(TodoContext)
+    const timeOutId = useRef<NodeJS.Timeout | null>(null)
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value)
-    }
-    useEffect(() => {
-        let timeOutId: NodeJS.Timeout;
-        timeOutId = setTimeout(() => {
-            setFilterText(searchTerm)
-        }, 300)
-        return () => {
-            clearTimeout(timeOutId);
+        // console.log("typing...")
+        if (timeOutId.current) {
+            clearTimeout(timeOutId.current)
+            // console.log("timer cleared")
         }
-    }, [searchTerm])
-    console.log("search term ", searchTerm)
+        timeOutId.current = setTimeout(() => {
+            // console.log("dispatch")
+            dispatch(todoSearch(e.target.value))
+        }, 1000);
+    }
+
     return (
         <header className="bg-dark mb-3">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12">
                         <nav className="navbar justify-content-between">
-                            <a className="navbar-brand"><i className="fa fa-tasks p-2" />TODO</a>
+                            <a className="navbar-brand" href="/"><i className="fa fa-tasks p-2" />TODO</a>
                             <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search Task....    [ Alt + s ]" aria-label="Search" id="searchtextbox" onChange={handleChange} accessKey="s" value={searchTerm} />
+                                <input className="form-control mr-sm-2" type="search" placeholder="Search Task....    [ Alt + s ]" aria-label="Search" id="searchtextbox" onChange={handleChange} accessKey="s"
+                                // value={searchTerm}
+                                />
                             </form>
                         </nav>
                     </div>
