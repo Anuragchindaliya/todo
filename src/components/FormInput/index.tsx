@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import moment from 'moment';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { todoAddAction, todoCancelEdit, todoDeleteAllAction, todoEditUpdate } from '../../context/todoAction';
 import { TodoContext } from '../../context/todoContext';
 const FormInput = () => {
-    const { dispatch, edit } = useContext(TodoContext);
+    const { dispatch, edit, todos } = useContext(TodoContext);
     const initialState: string = edit.mode ? edit.taskName : "";
     const [taskName, setTaskname] = useState<string>(initialState);
     const [isTaskNameChanged, setTaskNameChanged] = useState(false);
@@ -43,10 +44,15 @@ const FormInput = () => {
         dispatch(todoCancelEdit());
         setTaskname("")
     }
+    const orderNumber = useMemo(() => {
+        return moment.localeData().ordinal(todos.length + 1)
+    }, [todos.length])
     return (
         <form className="form-row" onSubmit={handleFormSubmit}>
             <div className="col-md-8 col-sm-12  bd-search">
-                <input ref={inputRef} type="text" className="form-control" placeholder="Create your first task" accessKey="t" onChange={handleTaskName} value={taskName} />
+                <input ref={inputRef} type="text" className="form-control"
+                    placeholder={`Create your ${orderNumber} task `}
+                    accessKey="t" onChange={handleTaskName} value={taskName} />
                 {isError && <div className='text-danger'>{isError}</div>}
             </div>
             <div className="col-md-4 col-sm-6 btnq">
@@ -75,4 +81,4 @@ const FormInput = () => {
         </form>
     )
 }
-export default  FormInput;
+export default FormInput;
